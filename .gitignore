@@ -1,0 +1,8 @@
+.vscode
+.circleci
+
+__pycache__
+*.pyc
+
+.env
+sr-api.egg-info
