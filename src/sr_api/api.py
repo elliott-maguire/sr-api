@@ -1,6 +1,12 @@
 """ Initialize SmartRecruiters API client. """
 
-# utility module imports go here
+import os
+import json
+
+from sr_api.exceptions import *
+
+import ergal
+import requests
 
 
 class SmartAPI:
@@ -11,11 +17,31 @@ class SmartAPI:
             str:token -- a certified SmartToken
 
         """
+
+        self.token = token
+        self.instance = self._get_instance()
     
-    def get_instance(self):
+    def _get_instance(self):
         """ Get platform instance. """
 
-    def setup_database(self):
+        url = 'https://api.smartrecruiters.com/configuration/company'
+        headers = {'X-SmartToken': self.token}
+        response = requests.get(url, headers=headers)
+
+        if response.status_code == 200:
+            return json.loads(response.text)
+        elif response.status_code in [401, 403]:
+            raise AuthError()
+        elif response.status_code == 400:
+            raise ProgrammingError()
+        elif response.status_code == 429:
+            raise ThrottleError()
+        else:
+            raise APIError()
+
+    def _setup_database(self):
         """ Set up local ERGAL database. """
+
+        
 
         
