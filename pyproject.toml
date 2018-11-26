@@ -1,14 +1,14 @@
 [tool.poetry]
-name = "sr-api"
+name = "srapi"
 version = "0.1.0"
 license = "MIT"
-description = "The SmartRecruiters API client for Python."
+description = "A Python client for the SmartRecruiters API."
 readme = "README.md"
 authors = ["Elliott Maguire <e.maguire@smartrecruiters.com"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-ergal = "^0.1.5"
+requests = "^2.20"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"
