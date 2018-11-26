@@ -27,7 +27,7 @@ In both cases, `candidates` would be a dict object housing the response data.
 Contact
 -------
 
-Send me an email: `emag.codes@gmail.com`
+Send me an email: `e.maguire@smartrecruiters.com`
 
 Collaboration
 -------------

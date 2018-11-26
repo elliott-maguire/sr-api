@@ -1,3 +1,0 @@
-""" SmartRecruiters API utilities. """
-
-
