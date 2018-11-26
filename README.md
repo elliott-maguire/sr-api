@@ -24,4 +24,13 @@ It's functionality is versatile in that the we can use an abstract method of cal
 
 In both cases, `candidates` would be a dict object housing the response data.
 
+Contact
+-------
+
+Send me an email: `emag.codes@gmail.com`
+
+Collaboration
+-------------
+
+All collaboration on this project will be done by SmartRecruiters employees. All are free to submit issues and enhancement proposals, but you must be a verified employee in order to make changes to the source.
 
