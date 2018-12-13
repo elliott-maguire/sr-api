@@ -30,23 +30,18 @@ def call(endpoint, method, **kwargs):
         response = getattr(requests, method)(url, **kwargs)
 
     if response.status_code == 200:
-        return json.loads(response)
-    elif response.status_code in (203, 204):
-        return response.text
+        try:
+            return json.loads(response.text)
+        except json.JSONDecodeError:
+            return response.text
     else:
         raise Exception('Error: {}'.format(response.status_code))
 
 
 class CandidateAPI:
+    """ Partial hardcoded Candidate API endpoint access. """
     def __init__(self, token):
-        """ Hardcoded Candidate API endpoint access.
-
-        These API classes make it easier to call endpoints by hardcoding
-        request info like the actual endpoint path, and making
-        the passage of arguments much more intuitive.
-
-        All operations on this interface should be executed in
-        accordance with the official SmartRecruiters API documentation.
+        """ Initialize the Candidate API.
         
         Arguments:
             token -- a SmartRecruiters API token
@@ -54,8 +49,12 @@ class CandidateAPI:
         """
         self.headers = {'X-SmartToken': token}
     
-    def search_candidates(self, **kwargs):
-        """ Search for candidates. (GET /candidates) """
+    def search(self, **kwargs):
+        """ Search for candidates. 
+        
+        GET /candidates
+        
+        """
         endpoint = '/candidates'
         method = 'get'
 
@@ -63,8 +62,12 @@ class CandidateAPI:
             endpoint, method, headers=self.headers, params=kwargs)
         return response
     
-    def create_candidate(self, **kwargs):
-        """ Create a candidate. (POST /candidates) """
+    def create(self, **kwargs):
+        """ Create a candidate. 
+        
+        POST /candidates 
+        
+        """
         endpoint = '/candidates'
         method = 'post'
         data = json.dumps(**kwargs)
@@ -73,21 +76,80 @@ class CandidateAPI:
             endpoint, method, headers=self.headers, data=data)
         return response
 
-    def get_candidate(self, cid):
-        """ Get a candidate's details. (GET /candidates/{cid}) """
-        endpoint = '/candidates/{cid}'.format(cid=cid)
+    def get(self, cid):
+        """ Get a candidate's details. 
+        
+        GET /candidates/{cid}
+        
+        """
+        endpoint = '/candidates/{}'.format(cid)
         method = 'get'
 
         response = call(
             endpoint, method, headers=self.headers)
         return response
     
-    def delete_candidate(self, cid):
-        """ Delete a candidate. (DELETE /candidates/{cid}) """
-        endpoint = '/candidates/{cid}'.format(cid=cid)
+    def delete(self, cid):
+        """ Delete a candidate. 
+        
+        DELETE /candidates/{cid}
+        
+        """
+        endpoint = '/candidates/{}'.format(cid)
         method = 'delete'
 
-        response = call(endpoint, method)
+        response = call(
+            endpoint, method, headers=self.headers)
         return response
-        
     
+    def update(self, cid):
+        """ Update a candidate. 
+        
+        PATCH /candidates/{cid}
+        
+        """
+        endpoint = '/candidates/{}'.format(cid)
+        method = 'patch'
+
+        response = call(
+            endpoint, method, headers=self.headers)
+        return response
+
+
+class JobAPI:
+    """ Partial hardcoded Candidate API endpoint access. """
+    def __init__(self, token):
+        """ Initialize the Job API.
+        
+        Arguments:
+            token -- a SmartRecruiters API token
+        
+        """
+        self.headers = {'X-SmartToken': token}
+
+    def search(self, **kwargs):
+        """ Search for jobs.
+        
+        GET /jobs
+        
+        """
+        endpoint = '/jobs'
+        method = 'get'
+
+        response = call(
+            endpoint, method, headers=self.headers)
+        return response
+
+    def create(self, **kwargs):
+        """ Create a candidate. 
+        
+        POST /candidates 
+        
+        """
+        endpoint = '/candidates'
+        method = 'post'
+        data = json.dumps(**kwargs)
+
+        response = call(
+            endpoint, method, headers=self.headers, data=data)
+        return response
