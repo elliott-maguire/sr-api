@@ -12,23 +12,20 @@ from srapi.utils import call
 
 class CandidateAPI:
     """ Partial hardcoded Candidate API endpoint access. """
+
     def __init__(self, token):
         """ Initialize the Candidate API.
 
         :param token: a SmartRecruiters API token
         """
-        self.headers = {'X-SmartToken': token}
+        self.headers = {"X-SmartToken": token}
 
     def search(self, **kwargs):
         """ Search for candidates. """
-        endpoint = '/candidates'
-        method = 'get'
+        endpoint = "/candidates"
+        method = "get"
 
-        response = call(
-            endpoint,
-            method,
-            headers=self.headers,
-            params=kwargs)
+        response = call(endpoint, method, headers=self.headers, params=kwargs)
 
         return response
 
@@ -37,15 +34,11 @@ class CandidateAPI:
 
         POST /candidates
         """
-        endpoint = '/candidates'
-        method = 'post'
+        endpoint = "/candidates"
+        method = "post"
         data = json.dumps(**kwargs)
 
-        response = call(
-            endpoint,
-            method,
-            headers=self.headers,
-            data=data)
+        response = call(endpoint, method, headers=self.headers, data=data)
 
         return response
 
@@ -55,12 +48,9 @@ class CandidateAPI:
         GET /candidates/{cid}
         """
         endpoint = f"/candidates/{cid}"
-        method = 'get'
+        method = "get"
 
-        response = call(
-            endpoint,
-            method,
-            headers=self.headers)
+        response = call(endpoint, method, headers=self.headers)
 
         return response
 
@@ -70,12 +60,9 @@ class CandidateAPI:
         DELETE /candidates/{cid}
         """
         endpoint = f"/candidates/{cid}"
-        method = 'delete'
+        method = "delete"
 
-        response = call(
-            endpoint,
-            method,
-            headers=self.headers)
+        response = call(endpoint, method, headers=self.headers)
 
         return response
 
@@ -84,12 +71,9 @@ class CandidateAPI:
 
         PATCH /candidates/{cid}
         """
-        endpoint = '/candidates/{}'.format(cid)
-        method = 'patch'
+        endpoint = "/candidates/{}".format(cid)
+        method = "patch"
 
-        response = call(
-            endpoint,
-            method,
-            headers=self.headers)
+        response = call(endpoint, method, headers=self.headers)
 
         return response
