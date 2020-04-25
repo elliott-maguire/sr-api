@@ -1,4 +1,4 @@
-from src.srapi import __version__
+from srapi import __version__
 
 
 def test_version():

@@ -1,6 +1,6 @@
 """
-srapi.jobs
-~~~~~~~~~~
+srapi.job
+~~~~~~~~~
 
 This module implements the Job API client.
 """
@@ -32,11 +32,11 @@ class JobAPI:
         return response
 
     def create(self, **kwargs):
-        """ Create a candidate.
+        """ Create a job.
 
-        POST /candidates
+        POST /jobs
         """
-        endpoint = "/candidates"
+        endpoint = "/jobs"
         method = "post"
         data = json.dumps(**kwargs)
 
